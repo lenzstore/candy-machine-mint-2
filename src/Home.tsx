@@ -19,7 +19,6 @@ import {
   mintOneToken,
   shortenAddress,
 } from "./candy-machine";
-import { url } from "inspector";
 
 const ConnectButton = styled(WalletDialogButton)`
   heigth: 5px;
