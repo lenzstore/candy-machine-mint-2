@@ -1,5 +1,6 @@
 {
   "name": "candy-machine-mint",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -35,7 +36,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage": ".",
   "eslintConfig": {
     "extends": [
       "react-app",
