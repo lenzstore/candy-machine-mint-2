@@ -3,7 +3,11 @@ import styled from "styled-components";
 import Countdown from "react-countdown";
 import { Button, CircularProgress, Snackbar } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
-import car from "./car-image.png"
+import walletIcon from './svg/wallet-icon.svg';
+import solanaIcon from './svg/solana-icon.svg';
+import twitterIcon from './svg/twitter-icon.svg';
+import discordIcon from './svg/discord-icon.svg';
+import siteIcon from './svg/site-icon-white.svg';
 
 import * as anchor from "@project-serum/anchor";
 
@@ -29,17 +33,21 @@ const CounterText = styled.span``; // add your styles here
 
 const HeaderContainer = styled.div`
   display: flex;
-  background-color: #4E3673;
+  background-color: #1A1627;
   text-align: center;
   flex-direction: row`;
 
 const AccountContainer = styled.div`
+  width: 150px;
+  box-shadow: 0px 1px 1px 1px; 
+  display: flex;
+  flex-direction: row;
   margin-right: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
-  background-color: slateblue;
-  border: 2px solid slateblue;
+  background-color: #1A1627;
+  border: 2px solid #1A1627;
   border-radius: 15px;`;
 
   
@@ -47,7 +55,7 @@ const MintContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 500px;
-  background-color: #D8C1FA;
+  background-color: #493D6E;
   justify-content: center;
   align-items: center;`;
   
@@ -68,15 +76,36 @@ const SocialButton = styled(Button)`
 const RoadmapContainer = styled.div`
   display: flex;
   height: 420px;
-  background-color: #D8C1FA;
+  background-color: #493D6E;
   flex-direction: row;`;
 
 const RarityContainer = styled.div`
   display: flex;
   heigth: 500px;
-  background-color: #D8C1FA;
+  background-color: #493D6E;
   text-align: center;
   flex-direction: column;`;
+
+const RoadmapBubble = styled.div`
+  background-color: #1A1627;
+  border-radius: 15px;
+  height: 100px;
+  flex: 1;
+  margin-right: 75px;
+  margin-left: 75px;`;
+
+const RoadMapPgraph = styled.p`
+  margin-left: 15px;
+  margin-right: 15px;
+  text-align: justify;
+  font-size: 20px;
+  font-weight: inherit;
+  color: white;`;
+
+const GIF = styled.img`
+  display: block;
+  margin-left: auto;
+  margin-right: auto`;
 
 export interface HomeProps {
   candyMachineId: anchor.web3.PublicKey;
@@ -212,26 +241,25 @@ const Home = (props: HomeProps) => {
   }, [wallet, props.candyMachineId, props.connection]);
 
   return (
-    <main style={{backgroundColor: '#D8C1FA'}}>
+    <main style={{backgroundColor: '#493D6E'}}>
       {wallet.connected &&
         <HeaderContainer>
-            {wallet.connected && 
-            <div style={{flex: 1.7, marginTop: 20}}>
-              <img className="connectedLogo" src="https://i.hizliresim.com/7fzua4c.png" alt={""} width="64" height="64" style={{backgroundColor: "#4E3673",borderRadius: 50}}/>
-            </div>}
+            
+            <div style={{flex: 6.7, flexDirection: "row", display: "flex", marginTop: 12}}>
+              <img className="siteIcon" src={siteIcon} alt="Site Icon" width="48" height="48" style={{marginLeft: 60, marginTop: 18}}/>
+              <p style={{color: "white", fontSize: 26, marginLeft: 20, fontWeight: 'bold'}}> NFTofas</p>
+            </div>
 
-            {wallet.connected && (
-            <p style={{color: "white", fontSize: 30,flex: 5, fontWeight: 'bold'}}> NFTofasch</p>
-            )}
+            
 
             <div style={{flex: 0.15, flexDirection: "column", alignContent: 'center'}}>
               
-              <div style={{marginTop: 30}}>
+              <div style={{marginTop: 25}}>
                 <SocialButton onClick={(e) => {
-                  window.open("http://twitter.com/torrhen3", "_blank")
+                  window.open("http://twitter.com/NFTofas", "_blank")
                 }}>
-                  <img className="twitterButton" src="https://i.hizliresim.com/3yr3vgc.png" 
-                    alt={"Twitter"} width="20" height="16"/>
+                  <img className="twitterButton" src={twitterIcon} 
+                    alt="Twitter" width="24" height="24"/>
                 </SocialButton>
               </div>
 
@@ -239,41 +267,55 @@ const Home = (props: HomeProps) => {
                 <SocialButton onClick={(e) => {
                   window.open("http://discord.com", "_blank")
                 }}>
-                  <img className="twitterButton" src="https://i.hizliresim.com/11plsxr.png" 
-                    alt={"Twitter"} width="20" height="24"/>
+                  <img className="discordButton" src={discordIcon} 
+                    alt="Discord" width="24" height="24"/>
                 </SocialButton>
               </div>
               
             </div>
 
-            <div style={{ flex: 1.2,display: "flex", flexDirection: "column",textAlign: "right"}}>  
+            <div style={{ flex: 1.2,display: "flex",textAlign: "right"}}>  
               <AccountContainer>
-                {wallet.connected && (
-                  <p style={{color: 'white'}}>Address: {shortenAddress(wallet.publicKey?.toBase58() || "")}</p>
-                )}
 
-                {wallet.connected && (
-                  <p style={{color: 'white'}}>Balance: {(balance || 0).toLocaleString()} SOL</p>
-                )}
+                <div style={{display: "flex", flexDirection: "column"}}>
+                  <img src={walletIcon} alt="Wallet" height="20" width="20" style={{marginTop: 18, marginLeft: 12}}/>
+                  <img src={solanaIcon} alt="Solana" height="20" width="20" style={{marginTop: 16, marginLeft: 12}}/>
+                </div>
+
+                <div style={{flexDirection:"column"}}>
+                  <p style={{color: 'white', marginLeft: 10}}>{shortenAddress(wallet.publicKey?.toBase58() || "")}</p>
+                
+                  <p style={{color: 'white', marginLeft: 10}}>{(balance || 0).toLocaleString()} SOL</p>
+                </div>
               </AccountContainer>
             </div>
         </HeaderContainer>}
       
         {!wallet.connected &&
-          <HeaderContainer>
-            
-            <div style={{flex: 1.15, marginTop: 20}}>
-              <img className="connectedLogo" src="https://i.hizliresim.com/7fzua4c.png" alt={""} width="64" height="64" style={{borderRadius: 50}}/>
-            </div>
-            
-            <p style={{color: "white", fontSize: 30,flex: 5, fontWeight: 'bold'}}> NFTofasch</p>
-            
-            <div style={{flex: 0.15}}></div>
+          <div>
+            <HeaderContainer>
+              
+              <div style={{flex: 6.7, flexDirection: "row", display: "flex"}}>
+                <img className="siteIcon" src={siteIcon} alt="Site Icon" width="48" height="48" style={{marginLeft: 60, marginTop: 18}}/>
+                <p style={{color: "white", fontSize: 26, marginLeft: 20, fontWeight: 'bold'}}> NFTofas</p>
+              </div>
 
-            <div style={{flex: 1, marginTop: 30}}>
-              <ConnectButton>Connect Wallet</ConnectButton>
+              <div style={{flex: 1, marginTop: 30, marginRight: 10}}>
+                <ConnectButton>Connect Wallet</ConnectButton>
+              </div>
+            </HeaderContainer>
+
+            <div style={{height: 1080}}>
+              <div style={{flex: 0.5, textAlign: "center"}}>
+                <p style={{fontSize: 30, color: "white"}}>Coming Soooon!</p>
+              </div>
+
+              <div>
+                <GIF src={"https://c.tenor.com/himbGmuY4cgAAAAC/turtle-friends.gif"} alt="GIF"></GIF>
+              </div>
             </div>
-          </HeaderContainer>
+          
+          </div>
         }
 
         {wallet.connected &&
@@ -319,27 +361,27 @@ const Home = (props: HomeProps) => {
         </MintContainer>}
 
         {wallet.connected &&
-          <div style={{backgroundColor: '#D8C1FA'}}>
+          <div style={{backgroundColor: '#493D6E'}}>
 
-            <p style={{fontSize: 24, fontWeight: 'bold', color: 'slateblue',textAlign: 'center'}}>ROAD MAP</p>
+            <p style={{fontSize: 24, fontWeight: 'bold', color: 'white',textAlign: 'center'}}>ROAD MAP</p>
 
             <RoadmapContainer>
               <div style={{flex: 10, flexDirection: 'column', textAlign: 'center'}}>
-                <div style={{backgroundColor: 'slateblue',borderRadius: 15, height: 100,flex: 1, marginRight: 75, marginLeft: 75}}>
-                  <p style={{marginLeft: 15, marginRight: 15,textAlign: 'justify',fontSize: 20, fontWeight: 'inherit',color: "white"}}>*******</p>
-                </div>
+                <RoadmapBubble>
+                  <RoadMapPgraph>****</RoadMapPgraph>
+                </RoadmapBubble>
                 
                 <div style={{height: 100,flex: 1, marginRight: 75, marginLeft: 75}}>
                   <p style={{marginLeft: 15, marginRight: 15,textAlign: 'justify',fontSize: 20, fontWeight: 'inherit',color: "white"}}></p>
                 </div>
                 
-                <div style={{backgroundColor: 'slateblue',borderRadius: 15, height: 100,flex: 1, marginRight: 75, marginLeft: 75}}>
-                  <p style={{marginLeft: 15, marginRight: 15,textAlign: 'justify',fontSize: 20, fontWeight: 'inherit',color: "white"}}>*******</p>
-                </div>
+                <RoadmapBubble>
+                  <RoadMapPgraph>****</RoadMapPgraph>
+                </RoadmapBubble>
                 
               </div>
             
-              <div style={{flex: 0.25, backgroundColor: 'darkgray', borderRadius: 5, height: 400}}>
+              <div style={{flex: 0.1, backgroundColor: 'white', borderRadius: 5, height: 400}}>
               
               </div>
             
@@ -348,9 +390,9 @@ const Home = (props: HomeProps) => {
                   <p style={{marginLeft: 15, marginRight: 15,textAlign: 'justify',fontSize: 20, fontWeight: 'inherit',color: "white"}}></p>
                 </div>
                 
-                <div style={{backgroundColor: 'slateblue',borderRadius: 15, height: 100,flex: 1, marginRight: 75, marginLeft: 75}}>
-                  <p style={{marginLeft: 15, marginRight: 15,textAlign: 'justify',fontSize: 20, fontWeight: 'inherit',color: "white"}}>*******</p>
-                </div>
+                <RoadmapBubble>
+                  <RoadMapPgraph>****</RoadMapPgraph>
+                </RoadmapBubble>
                 
                 <div style={{height: 100,flex: 1, marginRight: 75, marginLeft: 75}}>
                   <p style={{marginLeft: 15, marginRight: 15,textAlign: 'justify',fontSize: 20, fontWeight: 'inherit',color: "white"}}></p>
@@ -363,7 +405,7 @@ const Home = (props: HomeProps) => {
 
       {wallet.connected &&
         <RarityContainer>
-            <p style={{fontSize: 24, fontWeight: 'bold', color: 'slateblue',textAlign: 'center'}}>RARITY TABLE</p>
+            <p style={{fontSize: 24, fontWeight: 'bold', color: 'white',textAlign: 'center'}}>RARITY TABLE</p>
 
             <div style={{height: 500}}>
 
