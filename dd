@@ -1,0 +1,32 @@
+[1mdiff --git a/package.json b/package.json[m
+[1mindex 8e9593f..ece41a5 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -35,6 +35,7 @@[m
+     "test": "react-scripts test",[m
+     "eject": "react-scripts eject"[m
+   },[m
+[32m+[m[32m  "homepage": "https://adoring-snyder-07c8b6.netlify.app/",[m
+   "eslintConfig": {[m
+     "extends": [[m
+       "react-app",[m
+[1mdiff --git a/src/Home.tsx b/src/Home.tsx[m
+[1mindex 8712ef0..934ffe8 100644[m
+[1m--- a/src/Home.tsx[m
+[1m+++ b/src/Home.tsx[m
+[36m@@ -3,7 +3,6 @@[m [mimport styled from "styled-components";[m
+ import Countdown from "react-countdown";[m
+ import { Button, CircularProgress, Snackbar } from "@material-ui/core";[m
+ import Alert from "@material-ui/lab/Alert";[m
+[31m-import car from "./car-image.png"[m
+ [m
+ import * as anchor from "@project-serum/anchor";[m
+ [m
+[36m@@ -19,7 +18,6 @@[m [mimport {[m
+   mintOneToken,[m
+   shortenAddress,[m
+ } from "./candy-machine";[m
+[31m-import { url } from "inspector";[m
+ [m
+ const ConnectButton = styled(WalletDialogButton)`[m
+   heigth: 5px;[m
